@@ -9,19 +9,24 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          Home: {
+          HomeScreen: {
             screens: {
-              TabOneScreen: "Home",
+              HomeScreen: "Home",
             },
           },
-          Product: {
+          ProductScreen: {
             screens: {
-              TabTwoScreen: "Product",
+              ProductScreen: "Product",
             },
           },
-          User: {
+          UserScreen: {
             screens: {
-              TabTwoScreen: "User",
+              UserScreen: "User",
+            },
+          },
+          SettingScreen: {
+            screens: {
+              UserScreen: "Setting",
             },
           },
         },

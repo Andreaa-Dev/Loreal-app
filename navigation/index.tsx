@@ -1,4 +1,3 @@
-import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -9,7 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
 import { Icon, HamburgerIcon } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -25,6 +24,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import Setting from "../screens/setting/Setting";
 
 export default function Navigation({
   colorScheme,
@@ -78,50 +78,49 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="HomeScreen"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomePage}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <HamburgerIcon name="home" color={color} />
-          ),
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-        })}
-      />
-      <BottomTab.Screen
-        name="Product"
-        component={ProductPage}
         options={{
           title: "Product",
-          tabBarIcon: ({ color }) => <Icon name="product" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="home" size={24} color="black" />
+          ),
         }}
       />
       <BottomTab.Screen
-        name="User"
+        name="ProductScreen"
         component={ProductPage}
         options={{
           title: "Product",
-          tabBarIcon: ({ color }) => <Icon name="product" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="th" size={24} color="black" />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="UserScreen"
+        component={ProductPage}
+        options={{
+          title: "User",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="user-circle" size={24} color="black" />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="SettingScreen"
+        component={Setting}
+        options={{
+          title: "Setting",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="gears" size={24} color="black" />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -135,7 +134,7 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <Icon as={Ionicons} />;
+  return <FontAwesome />;
 }
 
 //FontAwesome size={30} style={{ marginBottom: -3 }} {...props}
