@@ -16,8 +16,6 @@ import HomePage from "../screens/homePage/HomePage";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import ProductPage from "../screens/product/ProductPage";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -25,6 +23,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Setting from "../screens/setting/Setting";
+import UserInformation from "../screens/user/UserInformation";
 
 export default function Navigation({
   colorScheme,
@@ -87,7 +86,7 @@ function BottomTabNavigator() {
         name="HomeScreen"
         component={HomePage}
         options={{
-          title: "Product",
+          title: "Home",
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={24} color="black" />
           ),
@@ -105,7 +104,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="UserScreen"
-        component={ProductPage}
+        component={UserInformation}
         options={{
           title: "User",
           tabBarIcon: ({ color }) => (
@@ -136,5 +135,3 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome />;
 }
-
-//FontAwesome size={30} style={{ marginBottom: -3 }} {...props}
