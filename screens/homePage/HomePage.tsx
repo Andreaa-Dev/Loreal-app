@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Input, Center, Image, Button } from "native-base";
 
 function HomePage() {
