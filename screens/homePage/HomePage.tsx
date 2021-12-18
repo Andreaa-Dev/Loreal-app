@@ -1,35 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet } from "react-native";
-import { Input, Center, Image, Button } from "native-base";
+
+import { Input, Center, Image, Button, Stack, FormControl } from "native-base";
+import { AppState } from "../../components/misc/types";
 
 function HomePage() {
+  const [userInformation, setUserInformation] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onChangeHanlder = (email: string, password: string) => {
+    setUserInformation({ email: email, password: password });
+  };
+
   return (
     <Center style={styles.container}>
       <Image
         style={styles.logo}
         source={{
-          uri: "https://logos-world.net/wp-content/uploads/2020/04/LOreal-Logo-1962-present.jpg",
+          uri: "https://i.pinimg.com/564x/36/c1/1d/36c11decc20c43cdd56ca3b701452da6.jpg",
         }}
-        alt="Alternate Text"
+        alt="error"
         size="xl"
       />
-      <Input
-        style={styles.input}
-        mx="3"
-        placeholder="Email"
-        w={{
-          base: "75%",
-          md: "25%",
-        }}
-      />
-      <Input
-        mx="3"
-        placeholder="Password"
-        w={{
-          base: "75%",
-          md: "25%",
-        }}
-      />
+      <FormControl>
+        <Stack space={5}>
+          <Stack>
+            <FormControl.Label>Username</FormControl.Label>
+            <Input
+              variant="underlined"
+              p={2}
+              placeholder="@gmail.com"
+              value=""
+            />
+          </Stack>
+          <Stack>
+            <FormControl.Label>Password</FormControl.Label>
+            <Input
+              variant="underlined"
+              p={2}
+              placeholder="Password should be at least 8 characters"
+              value=""
+            />
+          </Stack>
+        </Stack>
+      </FormControl>
+
       <Button.Group
         colorScheme="blue"
         variant="outline"
@@ -55,11 +73,12 @@ export default HomePage;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 100,
+    backgroundColor: "black",
   },
   logo: {
-    width: 150,
-    height: 58,
+    width: 200,
+    height: 150,
+    marginTop: 60,
   },
   input: {
     marginTop: 10,
@@ -70,7 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   mainPage: {
-    height: 250,
-    width: 300,
+    height: 300,
+    width: 500,
   },
 });

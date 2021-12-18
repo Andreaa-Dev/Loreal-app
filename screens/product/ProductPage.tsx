@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, ScrollView, StyleSheet } from "react-native";
-import { Input, Center, Image, Button } from "native-base";
+import { Input, Center, Image, Button, Flex } from "native-base";
 
 import { AppState } from "../../components/misc/types";
 import { fetchData } from "../../redux/action/product";
@@ -22,20 +22,24 @@ function ProductPage() {
       <Center>
         <Text style={styles.title}>PRODUCT</Text>
 
-        <Input
-          mx="3"
-          placeholder=""
-          w={{
-            base: "75%",
-            md: "25%",
-          }}
-        />
-        <Button onPress={() => console.log("hello world")}>Search</Button>
+        <Flex direction="row" mb="2.5" mt="1.5">
+          <Input
+            mx="3"
+            placeholder=""
+            w={{
+              base: "75%",
+              md: "25%",
+            }}
+          />
+          <Button onPress={() => console.log("hello world")}>Search</Button>
+        </Flex>
       </Center>
 
-      {productData.slice(0, 7).map((item) => {
-        return <ProductItem key={item.name} productData={item} />;
-      })}
+      <Flex direction="column" mb="2.5" mt="1.5">
+        {productData.slice(0, 7).map((item) => {
+          return <ProductItem key={item.name} productData={item} />;
+        })}
+      </Flex>
     </ScrollView>
   );
 }
@@ -45,6 +49,7 @@ export default ProductPage;
 const styles = StyleSheet.create({
   container: {
     marginLeft: 5,
+    marginRight: 5,
   },
   title: {
     fontSize: 20,

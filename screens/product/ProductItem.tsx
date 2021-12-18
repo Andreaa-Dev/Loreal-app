@@ -1,6 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { Image } from "native-base";
+import { View, StyleSheet } from "react-native";
+import { Text, Image } from "native-base";
 
 import { ProductType } from "../../components/misc/types";
 
@@ -11,9 +11,11 @@ function ProductItem({ productData }: ProductDataPropType) {
   const imageLink = productData.image_link;
   if (productData) {
     return (
-      <View>
-        <Text>{productData.name}</Text>
-        <Text> {productData.description}</Text>
+      <View style={styles.container}>
+        <Text bold>{productData.name}</Text>
+        <Text isTruncated maxW="300" w="80%">
+          {productData.description}
+        </Text>
         <Image
           source={{
             uri: imageLink,
@@ -30,3 +32,12 @@ function ProductItem({ productData }: ProductDataPropType) {
 }
 
 export default ProductItem;
+
+const styles = StyleSheet.create({
+  container: { marginTop: 10, marginBottom: 10 },
+  title: {
+    fontSize: 15,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+});
