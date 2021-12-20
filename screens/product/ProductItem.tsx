@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, Image } from "native-base";
+import { FontAwesome } from "@expo/vector-icons";
 
 import { ProductType } from "../../components/misc/types";
 
@@ -25,6 +26,7 @@ function ProductItem({ productData }: ProductDataPropType) {
         />
         <Text> {productData.price} $</Text>
         <Image source={{ uri: imageLink }} />
+        <FontAwesome name="heart" size={24} color="black" />
       </View>
     );
   }

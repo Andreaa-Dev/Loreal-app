@@ -7,7 +7,6 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
-import { Icon, HamburgerIcon } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";

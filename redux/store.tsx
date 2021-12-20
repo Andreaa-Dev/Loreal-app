@@ -9,6 +9,9 @@ const initState: AppState = {
   productState: {
     product: [],
   },
+  userState: {
+    userInformation: { email: "", password: "" },
+  },
 };
 
 export default function makeStore(initialState = initState) {

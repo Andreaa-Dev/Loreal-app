@@ -1,20 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, TextInput, Button } from "react-native";
+import { Formik } from "formik";
 
-import { Input, Center, Image, Button, Stack, FormControl } from "native-base";
-import { AppState } from "../../components/misc/types";
+import { Input, Center, Image, Stack, FormControl, Box } from "native-base";
+import { addUserInformation } from "../../redux/action/user";
 
 function HomePage() {
-  const [userInformation, setUserInformation] = useState({
-    email: "",
-    password: "",
-  });
-
-  const onChangeHanlder = (email: string, password: string) => {
-    setUserInformation({ email: email, password: password });
-  };
-
+  const dispatch = useDispatch();
   return (
     <Center style={styles.container}>
       <Image
@@ -25,37 +18,33 @@ function HomePage() {
         alt="error"
         size="xl"
       />
-      <FormControl>
-        <Stack space={5}>
-          <Stack>
-            <FormControl.Label>Username</FormControl.Label>
-            <Input
-              variant="underlined"
-              p={2}
-              placeholder="@gmail.com"
-              value=""
-            />
-          </Stack>
-          <Stack>
-            <FormControl.Label>Password</FormControl.Label>
-            <Input
-              variant="underlined"
-              p={2}
-              placeholder="Password should be at least 8 characters"
-              value=""
-            />
-          </Stack>
-        </Stack>
-      </FormControl>
-
-      <Button.Group
-        colorScheme="blue"
-        variant="outline"
-        size="sm"
-        style={styles.button}
-      >
-        <Button onPress={() => console.log("hello world")}>LOG IN</Button>
-      </Button.Group>
+      <Box style={styles.input}>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={(values) => {
+            dispatch(addUserInformation(values));
+          }}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <View>
+              <TextInput
+                placeholder="Email"
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+              />
+              <TextInput
+                placeholder="Password"
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+              />
+              {/* @ts-ignore */}
+              <Button onPress={handleSubmit} title="Log in" />
+            </View>
+          )}
+        </Formik>
+      </Box>
 
       <Image
         style={styles.mainPage}
@@ -72,22 +61,17 @@ function HomePage() {
 export default HomePage;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "black",
-  },
-  logo: {
-    width: 200,
-    height: 150,
-    marginTop: 60,
-  },
+  container: {},
   input: {
     marginTop: 10,
     marginBottom: 10,
   },
-  button: {
-    marginTop: 10,
-    marginBottom: 10,
+  logo: {
+    width: 200,
+    height: 50,
+    marginTop: 60,
   },
+
   mainPage: {
     height: 300,
     width: 500,
